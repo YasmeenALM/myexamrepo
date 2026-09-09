@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cloudsql-sa
+  namespace: myapp
+  annotations:
+    iam.gke.io/gcp-service-account: exam-backend@my-project-2-507717.iam.gserviceaccount.com
