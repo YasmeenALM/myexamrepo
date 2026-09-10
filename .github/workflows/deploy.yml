@@ -49,8 +49,7 @@ jobs:
       - name: Build backend image
         run: |
           docker build \
-            -t $BACKEND_IMAGE:${{ github.sha }} \
-            ./backend
+            -t $BACKEND_IMAGE:$ .
 
       - name: Push backend image
         run: |
