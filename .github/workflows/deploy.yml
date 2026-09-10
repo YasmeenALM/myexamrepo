@@ -53,12 +53,12 @@ jobs:
 
       - name: Push backend image
         run: |
-          docker push $BACKEND_IMAGE:${{ github.sha }}
+          docker push $BACKEND_IMAGE:$ .
 
       - name: Deploy backend
         run: |
           gcloud run deploy $BACKEND_SERVICE \
-            --image=$BACKEND_IMAGE:${{ github.sha }} \
+            --image=$BACKEND_IMAGE:$ .\
             --region=$REGION \
             --platform=managed \
             --port=8000 \
