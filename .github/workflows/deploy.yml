@@ -49,7 +49,7 @@ jobs:
       - name: Build backend image
         run: |
           docker build \
-            -t $BACKEND_IMAGE
+            -t $BACKEND_IMAGE:$ .
 
       - name: Push backend image
         run: |
