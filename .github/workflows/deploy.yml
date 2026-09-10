@@ -49,7 +49,7 @@ jobs:
       - name: Build backend image
         run: |
           docker build \
-            -t $BACKEND_IMAGE:$ .
+            -t $BACKEND_IMAGE
 
       - name: Push backend image
         run: |
@@ -58,7 +58,7 @@ jobs:
       - name: Deploy backend
         run: |
           gcloud run deploy $BACKEND_SERVICE \
-            --image=$BACKEND_IMAGE:$ .\
+            --image=$BACKEND_IMAGE \
             --region=$REGION \
             --platform=managed \
             --port=8000 \
