@@ -62,7 +62,7 @@ jobs:
             --image=$BACKEND_IMAGE:${{ github.sha }} \
             --region=$REGION \
             --platform=managed \
-            --port=8000 \
+            --port=8080 \
             --service-account=exam-backend@my-project-2-507717.iam.gserviceaccount.com \
             --add-cloudsql-instances=$CLOUD_SQL_INSTANCE \
             --set-secrets="DATABASE_URL=database-url:latest,SECRET_KEY=secret-key:latest" \
