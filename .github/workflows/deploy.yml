@@ -13,7 +13,7 @@ env:
   BACKEND_SERVICE: exam-backend
   FRONTEND_SERVICE: exam-frontend
 
-  BACKEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/backend
+  BACKEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/backend:v1
   FRONTEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/frontend
 
   CLOUD_SQL_INSTANCE: my-project-2-507717:us-central1:free-trial-first-project
