@@ -13,7 +13,7 @@ env:
   BACKEND_SERVICE: exam-backend
   FRONTEND_SERVICE: exam-frontend
 
-  BACKEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/backend:v1
+  BACKEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/backend
   FRONTEND_IMAGE: us-central1-docker.pkg.dev/my-project-2-507717/exam-repo/frontend
 
   CLOUD_SQL_INSTANCE: my-project-2-507717:us-central1:free-trial-first-project
@@ -49,16 +49,17 @@ jobs:
       - name: Build backend image
         run: |
           docker build \
-            -t $BACKEND_IMAGE:$ .
+            -t $BACKEND_IMAGE:${{ github.sha }} \
+            ./backend
 
       - name: Push backend image
         run: |
-          docker push $BACKEND_IMAGE:$ .
+          docker push $BACKEND_IMAGE:${{ github.sha }}
 
       - name: Deploy backend
         run: |
           gcloud run deploy $BACKEND_SERVICE \
-            --image=$BACKEND_IMAGE \
+            --image=$BACKEND_IMAGE:${{ github.sha }} \
             --region=$REGION \
             --platform=managed \
             --port=8000 \
@@ -74,7 +75,6 @@ jobs:
           URL=$(gcloud run services describe $BACKEND_SERVICE \
             --region=$REGION \
             --format='value(status.url)')
-
           echo "url=$URL" >> "$GITHUB_OUTPUT"
 
     outputs:
@@ -113,9 +113,7 @@ jobs:
         env:
           BACKEND_URL: ${{ needs.deploy-backend.outputs.backend_url }}
         run: |
-          sed -i \
-            "s|\${BACKEND_URL}|$BACKEND_URL|g" \
-            frontend/nginx-cloudrun.conf
+          sed -i "s|\${BACKEND_URL}|$BACKEND_URL|g" frontend/nginx-cloudrun.conf
 
       - name: Build frontend image
         run: |
