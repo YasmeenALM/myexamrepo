@@ -5,4 +5,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY seed.py .
 ENV PYTHONUNBUFFERED=1
-CMD ["sh", "-c", "python seed.py && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "python seed.py && uvicorn app.main:app --host 0.0.0.0 --port 8080"]
